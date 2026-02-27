@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rainfall Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #4e73df, #1cc88a);
+      }
+
+      .container {
+        background: white;
+        width: 90%;
+        max-width: 600px;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 5px;
+        color: #444;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #4e73df;
+        outline: none;
+        box-shadow: 0 0 5px rgba(78, 115, 223, 0.4);
+      }
+
+      .row {
+        display: flex;
+        gap: 10px;
+      }
+
+      .row .form-group {
+        flex: 1;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 8px;
+        background-color: #4e73df;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background-color: #2e59d9;
+      }
+
+      @media (max-width: 600px) {
+        .row {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>🌦️ Rainfall Prediction</h1>
+
+      <form action="{{ url_for('predict') }}" method="post">
+        <div class="form-group">
+          <label>Location</label>
+          <select name="Location" required>
+            <option value="">Select Location</option>
+            <option value="Albury">Albury</option>
+            <option value="Sydney">Sydney</option>
+            <option value="Melbourne">Melbourne</option>
+            <option value="Perth">Perth</option>
+            <!-- Add all locations trained in your model here -->
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Min Temperature</label>
+            <input type="number" step="any" name="MinTemp" required />
+          </div>
+          <div class="form-group">
+            <label>Max Temperature</label>
+            <input type="number" step="any" name="MaxTemp" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Rainfall</label>
+          <input type="number" step="any" name="Rainfall" required />
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Humidity 9am</label>
+            <input type="number" step="any" name="Humidity9am" required />
+          </div>
+          <div class="form-group">
+            <label>Humidity 3pm</label>
+            <input type="number" step="any" name="Humidity3pm" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Pressure 9am</label>
+            <input type="number" step="any" name="Pressure9am" required />
+          </div>
+          <div class="form-group">
+            <label>Pressure 3pm</label>
+            <input type="number" step="any" name="Pressure3pm" required />
+          </div>
+        </div>
+
+        <button type="submit">Predict Rainfall</button>
+      </form>
+    </div>
+  </body>
+</html>
